@@ -1,0 +1,735 @@
+{
+	"info": {
+		"_postman_id": "bde974dd-7919-4e63-8ad2-a8e14702ef79",
+		"name": "File-Management-POC",
+		"description": "Assignment-based Node.js API for hierarchical folder & document management, including versioning and JWT-based authentication.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20527477"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login API",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"syed@example.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register API",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Syed\",\r\n  \"email\": \"syed@example.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Folders",
+			"item": [
+				{
+					"name": "Create new folder",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"My Folder 2\",\r\n  \"parentFolder\": null\r\n}\r\n\r\n// for express-validator\r\n// {\r\n//   \"name\": \"\"\r\n// }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/folders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"folders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Folder",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Updated Folder Name\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/folders/6804b9ccbc449d7e7d846908",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"folders",
+								"6804b9ccbc449d7e7d846908"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Folder",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/folders/6804b9ccbc449d7e7d846908",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"folders",
+								"6804b9ccbc449d7e7d846908"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Subfolders & documents",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/viewstore/67ffecc98700d61c98f928bf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"viewstore",
+								"67ffecc98700d61c98f928bf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of root folders",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/viewstore",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"viewstore"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Utilities",
+			"item": [
+				{
+					"name": "filter Endpoint with Folder Path",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/filter?search=project",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "project"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "total-documents Api",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/total-documents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"total-documents"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Documents",
+			"item": [
+				{
+					"name": "Create a new document",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Project Plan\",\r\n  \"content\": \"This is my plan for the file structure\",\r\n  \"folder\": \"67ffecc98700d61c98f928bf\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/documents",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add version to document",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"versionNumber\": \"1.0\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/documents/6802103b66ff907be2009883/version",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"documents",
+								"6802103b66ff907be2009883",
+								"version"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get document details",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/documents/6802103b66ff907be2009883",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"documents",
+								"6802103b66ff907be2009883"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all versions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/documents/6802103b66ff907be2009883/versions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"documents",
+								"6802103b66ff907be2009883",
+								"versions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update document title/content",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Updated Project Plan\",\r\n  \"content\": \"Updated content for my project\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/documents/6802103b66ff907be2009883",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"documents",
+								"6802103b66ff907be2009883"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete document and versions",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Updated Project Plan\",\r\n  \"content\": \"Updated content for my project\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/documents/6802124966ff907be2009894",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"documents",
+								"6802124966ff907be2009894"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZmZlOWJiNDc0Y2UxNjM5NjMyZDlhYyIsImlhdCI6MTc0NDgyNTA1MiwiZXhwIjoxNzQ1NDI5ODUyfQ.QIW-nThXQZd2Ba0RgzJi5klDqPfYOfFvparPwPo2vF4",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
